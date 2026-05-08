@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   description: "Next-generation data analytics platform for modern business intelligence.",
 };
 
+// Define viewport for mobile devices
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

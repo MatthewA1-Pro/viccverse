@@ -1,22 +1,14 @@
 "use client";
 
 import { NeonButton } from "@/components/ui/NeonButton";
+import { useState } from "react";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { 
-  Zap, 
-  BarChart3, 
-  Shield, 
-  Globe, 
-  ArrowRight, 
-  ChevronRight,
-  Play,
-  Github,
-  CheckCircle2
-} from "lucide-react";
+import { Zap, BarChart3, Shield, Globe, ArrowRight, ChevronRight, Play, Github, CheckCircle2, X, Menu } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
+  const [navOpen, setNavOpen] = useState(false);
   return (
     <div className="min-h-screen bg-[#020617] text-white selection:bg-primary/30">
       {/* Background Decor */}
@@ -34,13 +26,23 @@ export default function LandingPage() {
             </div>
             <span className="font-bold text-xl tracking-tight">Vortex<span className="text-primary">Pro</span></span>
           </div>
-          
+
+          {/* Desktop navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
             <Link href="#" className="hover:text-white transition-colors">Features</Link>
             <Link href="#" className="hover:text-white transition-colors">Solutions</Link>
             <Link href="#" className="hover:text-white transition-colors">Pricing</Link>
             <Link href="#" className="hover:text-white transition-colors">Documentation</Link>
           </div>
+
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setNavOpen(!navOpen)}
+            className="md:hidden flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white focus:outline-none"
+            aria-label="Toggle navigation"
+          >
+            {navOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
 
           <div className="flex items-center gap-4">
             <Link href="/login" className="text-sm font-semibold hover:text-primary transition-colors">Sign in</Link>
@@ -49,6 +51,18 @@ export default function LandingPage() {
             </Link>
           </div>
         </div>
+
+        {/* Mobile navigation panel */}
+        {navOpen && (
+          <div className="md:hidden bg-slate-950/30 backdrop-blur-md border-t border-white/5">
+            <div className="flex flex-col gap-4 py-4 px-6 text-sm font-medium text-slate-400">
+              <Link href="#" className="hover:text-white transition-colors">Features</Link>
+              <Link href="#" className="hover:text-white transition-colors">Solutions</Link>
+              <Link href="#" className="hover:text-white transition-colors">Pricing</Link>
+              <Link href="#" className="hover:text-white transition-colors">Documentation</Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}

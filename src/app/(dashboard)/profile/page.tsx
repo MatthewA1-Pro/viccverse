@@ -113,7 +113,7 @@ export default function ProfilePage() {
               />
               <CustomInput 
                 label="Email Address" 
-                defaultValue="alex@rivera.com" 
+                defaultValue="oluwavictortemitope@gmail.com" 
                 disabled={!isEditing}
                 leftIcon={<Mail size={18} />}
               />
