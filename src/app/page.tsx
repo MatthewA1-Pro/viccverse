@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { 
-  Zap, ArrowRight, Play, CheckCircle2, X, Menu, 
+  Zap, ArrowRight, Play, CheckCircle2, X, Menu, Plus,
   Code2, BrainCircuit, Rocket, Palette, Bot, Smartphone, 
   MessageCircle, Mail, Calendar, Star, ArrowUpRight, Globe, Shield, Activity
 } from "lucide-react";
@@ -329,8 +329,88 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing Section Placeholder */}
+      <section id="pricing" className="px-6 py-32 bg-slate-900/20 relative border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight">Simple, Transparent <span className="text-primary">Pricing</span></h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">Choose the perfect plan for your project's needs. Scale seamlessly as your business grows.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { name: "Starter", price: "$4,999", desc: "Perfect for early-stage startups needing a landing page and simple MVP.", features: ["Custom Landing Page", "Basic Next.js App", "Contact Form Integration", "Mobile Optimization", "1 Week Delivery"] },
+              { name: "Pro", price: "$9,999", desc: "Ideal for growing businesses needing complex SaaS architecture and auth.", features: ["Advanced Next.js App", "Supabase Auth + DB", "Custom Dashboard", "AI API Integration", "Stripe Integration", "2-3 Weeks Delivery"], popular: true },
+              { name: "Enterprise", price: "Custom", desc: "For large organizations requiring bespoke solutions and dedicated support.", features: ["Custom Architecture", "Enterprise Security", "Advanced AI Agents", "Legacy System Migration", "24/7 Priority Support", "Dedicated Tech Lead"] },
+            ].map((tier, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`p-8 rounded-3xl border flex flex-col ${tier.popular ? 'bg-slate-900 border-primary shadow-[0_0_30px_rgba(139,92,246,0.15)] relative overflow-hidden transform md:-translate-y-4' : 'bg-slate-900/40 border-white/5 backdrop-blur-sm'}`}
+              >
+                {tier.popular && (
+                  <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold uppercase tracking-wider py-1 px-4 rounded-bl-xl">Most Popular</div>
+                )}
+                <h3 className="text-2xl font-bold mb-2 text-white">{tier.name}</h3>
+                <p className="text-slate-400 text-sm mb-6 min-h-[40px]">{tier.desc}</p>
+                <div className="text-4xl font-black mb-8 text-white">{tier.price}<span className="text-lg text-slate-500 font-medium">{tier.price !== "Custom" ? " /project" : ""}</span></div>
+                
+                <div className="space-y-4 mb-8 flex-1">
+                  {tier.features.map((feature, j) => (
+                    <div key={j} className="flex items-center gap-3">
+                      <CheckCircle2 size={18} className="text-primary shrink-0" />
+                      <span className="text-sm font-medium text-slate-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <Link href="#contact" className="mt-auto">
+                  <button className={`w-full py-4 rounded-xl font-bold transition-all ${tier.popular ? 'bg-primary text-white hover:bg-primary/90' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}>
+                    Get Started
+                  </button>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="px-6 py-32 relative">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight">Frequently Asked <span className="text-primary">Questions</span></h2>
+            <p className="text-slate-400 text-lg">Everything you need to know about working with ViccVerse.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              { q: "How long does a typical project take?", a: "For a standard SaaS MVP or complex website, our average delivery time is 2 to 4 weeks. Enterprise solutions may take longer depending on scope. We emphasize rapid delivery without compromising on code quality or premium design." },
+              { q: "Do you offer ongoing support after launch?", a: "Absolutely. We provide a 30-day bug-free guarantee after launch. For long-term peace of mind, we offer ongoing maintenance retainers that cover security updates, performance monitoring, and continuous feature development." },
+              { q: "What technologies do you use?", a: "We specialize in modern, high-performance stacks: Next.js (React) for the frontend, Tailwind CSS for styling, Framer Motion for animations, and Supabase or Node.js for backend infrastructure. This ensures your project is blazing fast, SEO-friendly, and highly scalable." },
+              { q: "Do you integrate AI into your builds?", a: "Yes, we are experts at integrating LLMs (like OpenAI GPT-4 or Anthropic Claude) directly into your SaaS platforms to create smart AI assistants, automated data analysis, and intelligent workflows tailored to your users." },
+            ].map((faq, i) => (
+              <details key={i} className="group bg-slate-900/40 border border-white/5 rounded-2xl p-6 open:bg-slate-900/80 transition-colors cursor-pointer">
+                <summary className="font-bold text-lg text-white flex justify-between items-center outline-none">
+                  {faq.q}
+                  <span className="text-primary group-open:rotate-45 transition-transform duration-300">
+                    <Plus size={24} />
+                  </span>
+                </summary>
+                <p className="text-slate-400 mt-4 leading-relaxed pl-2 border-l-2 border-primary/30">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="px-6 py-32 relative overflow-hidden">
+      <section className="px-6 py-32 relative overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 bg-primary/5" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
         
