@@ -27,11 +27,15 @@ export default function VerifyEmailPage() {
       </p>
 
       <div className="space-y-4">
-        <Link href="/dashboard">
-          <NeonButton className="w-full" rightIcon={<ArrowRight size={18} />}>
-            Go to Dashboard
-          </NeonButton>
-        </Link>
+        <button 
+          onClick={() => {
+            localStorage.setItem("isLoggedIn", "true");
+            window.location.href = "/dashboard";
+          }}
+          className="w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+        >
+          Go to Dashboard <ArrowRight size={18} />
+        </button>
         
         <button 
           onClick={handleResend}

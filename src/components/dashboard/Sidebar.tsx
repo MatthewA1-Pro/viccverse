@@ -195,6 +195,19 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
             )}
           </AnimatePresence>
         </Link>
+        <button 
+          onClick={() => {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "/";
+          }}
+          className={cn(
+            "w-full mt-2 flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all group active:scale-95",
+            effectiveCollapsed && "justify-center"
+          )}
+        >
+          <LogOut className="w-5 h-5 shrink-0" />
+          {!effectiveCollapsed && <span className="text-sm font-bold">Sign Out</span>}
+        </button>
       </div>
     </motion.aside>
   );

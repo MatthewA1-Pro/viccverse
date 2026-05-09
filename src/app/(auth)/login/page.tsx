@@ -17,6 +17,7 @@ export default function LoginPage() {
     setIsLoading(true);
     // Simulate auth
     setTimeout(() => {
+      localStorage.setItem("isLoggedIn", "true");
       setIsLoading(false);
       router.push("/dashboard");
     }, 1500);
