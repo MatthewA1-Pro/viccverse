@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vortex Analytics Pro | Futuristic SaaS Dashboard",
-  description: "Next-generation data analytics platform for modern business intelligence.",
+  title: "ViccVerse | Premium Digital Agency",
+  description: "We build modern AI-powered websites, SaaS platforms, and digital products that help businesses grow faster.",
 };
 
 // Define viewport for mobile devices
