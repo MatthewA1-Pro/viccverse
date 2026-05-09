@@ -8,10 +8,23 @@ import {
   MoreHorizontal, Clock, CheckCircle2, ArrowRight, Bot, 
   FolderKanban, MessageSquare, BarChart3
 } from "lucide-react";
+import { 
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, ResponsiveContainer 
+} from "recharts";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 // Mock Data
+const chartData = [
+  { name: 'Mon', value: 4000 },
+  { name: 'Tue', value: 3000 },
+  { name: 'Wed', value: 5000 },
+  { name: 'Thu', value: 2780 },
+  { name: 'Fri', value: 1890 },
+  { name: 'Sat', value: 2390 },
+  { name: 'Sun', value: 3490 },
+];
+
 const activeProjects = [
   { id: 1, name: "Nexus AI Platform", client: "TechCorp", progress: 78, status: "On Track", members: 4, dueDate: "Oct 15" },
   { id: 2, name: "FinTech Mobile App", client: "GlobalPay", progress: 45, status: "At Risk", members: 6, dueDate: "Nov 02" },
@@ -96,6 +109,66 @@ export default function DashboardOverview() {
         <StatCard title="Team Productivity" value="94%" change="+4.1%" trend="up" icon={Activity} delay={0.3} />
         <StatCard title="Client Messages" value="28" change="-5%" trend="down" icon={MessageSquare} delay={0.4} />
       </div>
+
+      {/* Growth Chart Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <GlassCard className="p-6">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h3 className="text-xl font-bold text-white tracking-tight">Revenue Growth</h3>
+              <p className="text-xs text-slate-500 mt-1">Weekly performance overview.</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-primary" />
+                <span className="text-xs text-slate-400 font-bold">Revenue</span>
+              </div>
+            </div>
+          </div>
+          <div className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                <XAxis 
+                  dataKey="name" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#64748b', fontSize: 12 }}
+                  dy={10}
+                />
+                <YAxis 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#64748b', fontSize: 12 }}
+                  dx={-10}
+                />
+                <ChartTooltip 
+                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                  itemStyle={{ color: '#fff' }}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="value" 
+                  stroke="#8b5cf6" 
+                  strokeWidth={3}
+                  fillOpacity={1} 
+                  fill="url(#colorValue)" 
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </GlassCard>
+      </motion.div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Main Content Area (Left 2/3) */}

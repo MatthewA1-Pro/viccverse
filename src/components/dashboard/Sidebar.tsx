@@ -27,14 +27,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const topMenuItems = [
   { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
-  { icon: FolderKanban, label: "Projects", href: "/projects" },
-  { icon: CheckSquare, label: "Tasks", href: "/tasks" },
+  { icon: FolderKanban, label: "Projects", href: "/dashboard/projects" },
+  { icon: CheckSquare, label: "Tasks", href: "/dashboard/tasks" },
   { icon: BarChart3, label: "Analytics", href: "/analytics" },
-  { icon: MessageSquare, label: "Messages", href: "/messages", badge: "3" },
+  { icon: MessageSquare, label: "Messages", href: "/dashboard/messages", badge: "3" },
   { icon: Users, label: "Team", href: "/team" },
-  { icon: Files, label: "File Manager", href: "/files" },
-  { icon: Calendar, label: "Calendar", href: "/calendar" },
-  { icon: Bot, label: "AI Assistant", href: "/ai" },
+  { icon: Files, label: "File Manager", href: "/dashboard/files" },
+  { icon: Calendar, label: "Calendar", href: "/dashboard/calendar" },
+  { icon: Bot, label: "AI Assistant", href: "/dashboard/ai" },
 ];
 
 const bottomMenuItems = [
