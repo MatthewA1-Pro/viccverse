@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 export default function LandingPage() {
   return (
