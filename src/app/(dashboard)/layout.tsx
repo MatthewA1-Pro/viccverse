@@ -74,7 +74,7 @@ export default function DashboardLayout({
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Navbar */}
-        <header className="h-16 border-b border-slate-800/50 bg-slate-950/20 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-4 lg:px-6">
+        <header className="h-16 border-b border-white/5 bg-slate-950/80 backdrop-blur-2xl sticky top-0 z-40 flex items-center justify-between px-4 lg:px-6 shadow-[0_1px_20px_rgba(0,0,0,0.4)]">
           <div className="flex items-center gap-3 md:gap-4 flex-1">
             <button 
               onClick={() => setIsMobileMenuOpen(true)}

@@ -28,8 +28,10 @@ export function PublicNavbar() {
 
   return (
     <nav className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-300",
-      scrolled ? "bg-slate-950/80 backdrop-blur-xl border-b border-white/5 py-3" : "bg-transparent py-6"
+      "fixed top-0 w-full z-50 transition-all duration-500",
+      scrolled 
+        ? "bg-slate-950/80 backdrop-blur-2xl border-b border-primary/20 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" 
+        : "bg-transparent py-6"
     )}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}

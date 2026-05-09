@@ -297,8 +297,89 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Free Consultation / Strategy Section */}
+      <section id="contact" className="px-6 py-20 md:py-32 relative overflow-hidden bg-slate-950">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.05),transparent_70%)]" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                <Star size={14} className="fill-emerald-400" /> Premium Strategy Session
+              </div>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
+                Ready to Scale Your <span className="text-primary">Digital Presence?</span>
+              </h2>
+              <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
+                Book a 30-minute high-impact strategy session with our lead engineers. No sales pitch—just pure architectural value and a roadmap for your growth.
+              </p>
+              
+              <div className="space-y-4">
+                {[
+                  "Detailed Project Architecture Review",
+                  "Performance & SEO Audit",
+                  "AI Integration Opportunities",
+                  "Scalability Roadmap & Timeline"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                      <CheckCircle2 size={14} />
+                    </div>
+                    <span className="text-slate-300 font-medium text-sm sm:text-base">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <GlassCard className="p-8 md:p-10 border-white/10 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 blur-[60px] rounded-full -mr-20 -mt-20 group-hover:bg-primary/20 transition-colors" />
+                <h3 className="text-2xl font-bold text-white mb-6">Schedule Your Session</h3>
+                <form className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Full Name</label>
+                      <input type="text" placeholder="John Smith" className="w-full bg-slate-900/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Email Address</label>
+                      <input type="email" placeholder="john@company.com" className="w-full bg-slate-900/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Project Type</label>
+                    <select className="w-full bg-slate-900/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all appearance-none">
+                      <option>SaaS Platform</option>
+                      <option>AI Integration</option>
+                      <option>Enterprise Website</option>
+                      <option>Mobile App</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Message (Optional)</label>
+                    <textarea rows={3} placeholder="Tell us about your project goals..." className="w-full bg-slate-900/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 transition-all resize-none" />
+                  </div>
+                  <button className="w-full bg-primary text-white font-black py-4 rounded-xl hover:bg-primary/90 transition-all shadow-[0_0_25px_rgba(139,92,246,0.4)] active:scale-95 flex items-center justify-center gap-2 mt-4">
+                    Book Strategy Session <ArrowRight size={18} />
+                  </button>
+                </form>
+                <p className="text-center text-[10px] text-slate-500 mt-6 font-medium">Limited slots available this week. We'll reply within 2 hours.</p>
+              </GlassCard>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
-      <section id="faq" className="px-6 py-20 md:py-32 relative">
+      <section id="faq" className="px-6 py-20 md:py-32 relative bg-slate-950/50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 md:mb-16 space-y-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">Frequently Asked <span className="text-primary">Questions</span></h2>
