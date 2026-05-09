@@ -1,9 +1,10 @@
 "use client";
 
 import { Sidebar } from "@/components/dashboard/Sidebar";
-import { Search, Bell, Menu } from "lucide-react";
+import { Search, Bell, Menu, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({
   children,
@@ -11,6 +12,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -26,6 +28,12 @@ export default function DashboardLayout({
           <div className="flex items-center gap-4 flex-1">
             <button className="lg:hidden text-slate-400 hover:text-white transition-colors">
               <Menu size={24} />
+            </button>
+            <button 
+              onClick={() => router.back()}
+              className="hidden sm:flex text-slate-400 hover:text-white transition-colors items-center gap-2 text-sm font-bold bg-slate-900/50 hover:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-800/50"
+            >
+              <ArrowLeft size={16} /> Back
             </button>
             <div className="relative max-w-md w-full hidden md:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
