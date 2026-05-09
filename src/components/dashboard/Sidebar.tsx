@@ -21,9 +21,10 @@ import {
   Search
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/lib/supabase";
 
 const topMenuItems = [
   { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
@@ -45,8 +46,29 @@ const bottomMenuItems = [
 
 export function Sidebar({ permanent = false }: { permanent?: boolean }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const effectiveCollapsed = permanent ? false : isCollapsed;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchUser();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+    router.refresh();
+  };
+
+  const fullName = user?.user_metadata?.full_name || user?.email || "User";
+  const initials = user?.user_metadata?.first_name && user?.user_metadata?.last_name 
+    ? `${user.user_metadata.first_name[0]}${user.user_metadata.last_name[0]}`.toUpperCase()
+    : fullName.charAt(0).toUpperCase();
 
   return (
     <motion.aside
@@ -175,7 +197,11 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
       <div className="p-4 border-t border-border">
         <Link href="/profile" className="bg-muted/50 hover:bg-muted transition-colors border border-border rounded-2xl p-3 flex items-center gap-3 cursor-pointer group active:scale-95">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
-            <span className="font-bold text-slate-300 text-sm z-10">JS</span>
+            {user?.user_metadata?.avatar_url ? (
+              <img src={user.user_metadata.avatar_url} alt={fullName} className="w-full h-full object-cover" />
+            ) : (
+              <span className="font-bold text-slate-300 text-sm z-10">{initials}</span>
+            )}
             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <AnimatePresence>
@@ -186,7 +212,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
                 exit={{ opacity: 0 }}
                 className="flex flex-col min-w-0 flex-1"
               >
-                <span className="text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors">John Smith</span>
+                <span className="text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors">{fullName}</span>
                 <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-secondary" />
                   <span className="text-[10px] text-slate-500 font-semibold truncate">Enterprise Plan</span>
@@ -196,10 +222,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
           </AnimatePresence>
         </Link>
         <button 
-          onClick={() => {
-            localStorage.removeItem("isLoggedIn");
-            window.location.href = "/";
-          }}
+          onClick={handleSignOut}
           className={cn(
             "w-full mt-2 flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all group active:scale-95",
             effectiveCollapsed && "justify-center"

@@ -7,19 +7,58 @@ import { Mail, Lock, User, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  
   const router = useRouter();
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate auth
-    setTimeout(() => {
+    setError(null);
+
+    try {
+      const { data, error: signupError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            full_name: `${formData.firstName} ${formData.lastName}`,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (signupError) throw signupError;
+
+      if (data.user) {
+        // If email confirmation is required, they might need to check their inbox
+        // For now, let's redirect to verify-email or dashboard depending on setup
+        router.push("/verify-email");
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred during signup");
+    } finally {
       setIsLoading(false);
-      router.push("/verify-email");
-    }, 1500);
+    }
   };
 
   return (
@@ -29,36 +68,54 @@ export default function SignupPage() {
         <p className="text-slate-400">Join 10k+ businesses scaling with Vortex</p>
       </div>
 
+      {error && (
+        <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+          {error}
+        </div>
+      )}
+
       <form onSubmit={handleSignup} className="space-y-5">
         <div className="grid grid-cols-2 gap-4">
           <CustomInput
             label="First Name"
+            name="firstName"
             type="text"
             placeholder="John"
             required
+            value={formData.firstName}
+            onChange={handleChange}
             leftIcon={<User size={18} />}
           />
           <CustomInput
             label="Last Name"
+            name="lastName"
             type="text"
             placeholder="Doe"
             required
+            value={formData.lastName}
+            onChange={handleChange}
           />
         </div>
         
         <CustomInput
           label="Work Email"
+          name="email"
           type="email"
           placeholder="john@company.com"
           required
+          value={formData.email}
+          onChange={handleChange}
           leftIcon={<Mail size={18} />}
         />
         
         <CustomInput
           label="Password"
+          name="password"
           type="password"
           placeholder="••••••••"
           required
+          value={formData.password}
+          onChange={handleChange}
           leftIcon={<Lock size={18} />}
         />
 

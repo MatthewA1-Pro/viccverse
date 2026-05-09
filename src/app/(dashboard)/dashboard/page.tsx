@@ -13,6 +13,8 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 // Mock Data
 const chartData = [
@@ -68,6 +70,26 @@ const StatCard = ({ title, value, change, trend, icon: Icon, delay }: any) => (
 );
 
 export default function DashboardOverview() {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getProfile();
+  }, []);
+
+  const firstName = user?.user_metadata?.first_name || "there";
+  const fullName = user?.user_metadata?.full_name || user?.email || "User";
+
   return (
     <div className="space-y-8 pb-10">
       {/* Header Section */}
@@ -84,7 +106,9 @@ export default function DashboardOverview() {
             </span>
             System Online
           </div>
-          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Good morning, John.</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
+            {loading ? "Good morning..." : `Good morning, ${firstName}.`}
+          </h1>
           <p className="text-slate-400 text-sm md:text-base">Here's what's happening across your projects today.</p>
         </motion.div>
         
@@ -305,12 +329,18 @@ export default function DashboardOverview() {
               <div className="flex items-center gap-4 mb-4 relative z-10">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary to-secondary p-[2px]">
                   <div className="w-full h-full rounded-[14px] bg-slate-900 flex items-center justify-center overflow-hidden">
-                     <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200" alt="John Smith" className="w-full h-full object-cover" />
+                     {user?.user_metadata?.avatar_url ? (
+                       <img src={user.user_metadata.avatar_url} alt={fullName} className="w-full h-full object-cover" />
+                     ) : (
+                       <div className="w-full h-full bg-slate-800 flex items-center justify-center text-xl font-black text-primary">
+                         {fullName.charAt(0).toUpperCase()}
+                       </div>
+                     )}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white">John Smith</h3>
-                  <p className="text-xs text-slate-400 font-medium">Enterprise Admin</p>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-bold text-white truncate">{fullName}</h3>
+                  <p className="text-xs text-slate-400 font-medium truncate">{user?.email}</p>
                 </div>
               </div>
               <div className="flex gap-2 relative z-10">
