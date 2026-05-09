@@ -137,16 +137,16 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 w-full"
           >
             <Link href="#contact" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)]">
-                Start Your Project <ArrowRight size={20} />
+              <button className="w-full sm:w-auto px-6 py-4 md:px-8 md:py-4 rounded-full bg-primary text-white font-bold text-base md:text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)]">
+                Start Your Project <ArrowRight size={20} className="shrink-0" />
               </button>
             </Link>
             <Link href="#contact" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
-                Book a Free Consultation <Calendar size={20} />
+              <button className="w-full sm:w-auto px-6 py-4 md:px-8 md:py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-base md:text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+                Free Consultation <Calendar size={20} className="shrink-0" />
               </button>
             </Link>
           </motion.div>
@@ -237,12 +237,12 @@ export default function LandingPage() {
       {/* Portfolio Section */}
       <section id="work" className="px-6 py-32 bg-slate-950/50 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
              <div className="space-y-4 max-w-2xl">
                <h2 className="text-4xl md:text-6xl font-black tracking-tight">Featured <span className="text-primary">Work</span></h2>
                <p className="text-slate-400 text-lg">Explore our recent success stories and see how we've helped ambitious brands transform their digital presence.</p>
              </div>
-             <button className="px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors font-semibold flex items-center gap-2">
+             <button className="w-full md:w-auto justify-center px-6 py-3.5 rounded-full border border-white/10 hover:bg-white/5 transition-colors font-semibold flex items-center gap-2 text-sm md:text-base">
                View All Projects <ArrowRight size={18} />
              </button>
           </div>
@@ -263,12 +263,12 @@ export default function LandingPage() {
                  <div className="h-64 sm:h-80 overflow-hidden relative">
                    <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
                    <img src={project.img} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-                   <div className="absolute top-4 right-4 z-20 flex gap-2">
-                     <button className="px-4 py-2 rounded-full bg-slate-900/80 backdrop-blur-md text-white hover:bg-primary transition-colors text-sm font-bold flex items-center gap-2">
-                       <Play size={16} /> Live Preview
+                   <div className="absolute top-3 right-3 md:top-4 md:right-4 z-20 flex gap-2">
+                     <button className="px-3 md:px-4 py-2 rounded-full bg-slate-900/80 backdrop-blur-md text-white hover:bg-primary transition-colors text-xs md:text-sm font-bold flex items-center gap-1.5 md:gap-2">
+                       <Play size={14} className="md:w-4 md:h-4" /> Live Preview
                      </button>
-                     <button className="p-2 rounded-full bg-slate-900/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors" aria-label="Case Study">
-                       <ArrowUpRight size={20} />
+                     <button className="p-2 rounded-full bg-slate-900/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors shrink-0" aria-label="Case Study">
+                       <ArrowUpRight size={16} className="md:w-5 md:h-5" />
                      </button>
                    </div>
                  </div>
@@ -346,10 +346,10 @@ export default function LandingPage() {
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
             Join the forward-thinking brands that trust ViccVerse to build their most critical digital infrastructure.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+          <div className="flex flex-col w-full sm:flex-row items-center justify-center gap-4 pt-6">
              <Link href="#contact" className="w-full sm:w-auto">
-               <button className="w-full sm:w-auto px-10 py-5 rounded-full bg-white text-slate-950 font-black text-lg hover:bg-slate-200 transition-all flex items-center justify-center gap-2 shadow-xl hover:scale-105">
-                 Start Your Digital Journey <ArrowRight size={20} />
+               <button className="w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 rounded-full bg-white text-slate-950 font-black text-base md:text-lg hover:bg-slate-200 transition-all flex items-center justify-center gap-2 shadow-xl hover:scale-105">
+                 Start Your Journey <ArrowRight size={20} className="shrink-0" />
                </button>
              </Link>
           </div>
