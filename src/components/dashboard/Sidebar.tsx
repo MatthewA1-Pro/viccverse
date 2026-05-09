@@ -51,7 +51,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
   return (
     <motion.aside
       animate={{ width: effectiveCollapsed ? 80 : 260 }}
-      className="h-screen sticky top-0 bg-slate-950/80 backdrop-blur-2xl border-r border-slate-800/60 flex flex-col z-50 overflow-hidden shadow-2xl"
+      className="h-screen sticky top-0 bg-background/80 backdrop-blur-2xl border-r border-border flex flex-col z-50 overflow-hidden shadow-2xl transition-colors duration-500"
     >
       {/* Logo Section */}
       <div className="p-6 flex items-center gap-3">
@@ -172,8 +172,8 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
       </div>
 
       {/* Footer / User Info */}
-      <div className="p-4 border-t border-slate-800/50">
-        <Link href="/profile" className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group active:scale-95">
+      <div className="p-4 border-t border-border">
+        <Link href="/profile" className="bg-muted/50 hover:bg-muted transition-colors border border-border rounded-2xl p-3 flex items-center gap-3 cursor-pointer group active:scale-95">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
             <span className="font-bold text-slate-300 text-sm z-10">JS</span>
             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />

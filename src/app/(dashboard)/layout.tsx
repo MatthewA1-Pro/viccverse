@@ -5,6 +5,7 @@ import { Search, Bell, Menu, ArrowLeft, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function DashboardLayout({
   children,
@@ -99,6 +100,7 @@ export default function DashboardLayout({
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
+            <ThemeToggle />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

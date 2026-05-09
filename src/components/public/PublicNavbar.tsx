@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NeonButton } from "@/components/ui/NeonButton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -57,7 +58,8 @@ export function PublicNavbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Link href="/login" className="text-sm font-semibold text-slate-300 hover:text-white">Sign In</Link>
+          <ThemeToggle />
+          <Link href="/login" className="text-sm font-semibold text-slate-300 dark:text-slate-300 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-950 transition-colors">Sign In</Link>
           <Link href="/signup">
             <NeonButton size="sm">Get Started</NeonButton>
           </Link>
@@ -119,9 +121,12 @@ export function PublicNavbar() {
               </div>
 
               <div className="mt-auto flex flex-col gap-4">
-                <Link href="/login" onClick={() => setIsOpen(false)} className="text-center font-bold text-slate-400 hover:text-white py-3 border border-white/5 rounded-xl transition-all">
-                  Sign In
-                </Link>
+                <div className="flex items-center gap-4">
+                  <ThemeToggle />
+                  <Link href="/login" onClick={() => setIsOpen(false)} className="flex-1 text-center font-bold text-slate-400 hover:text-white py-3 border border-white/5 rounded-xl transition-all">
+                    Sign In
+                  </Link>
+                </div>
                 <Link href="/signup" onClick={() => setIsOpen(false)}>
                   <NeonButton className="w-full py-4 text-base font-black">Get Started</NeonButton>
                 </Link>

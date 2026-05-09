@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #020617;
-  --color-foreground: #f8fafc;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   
-  --color-card: rgba(15, 23, 42, 0.6);
-  --color-card-foreground: #f8fafc;
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   
   --color-primary: #8b5cf6;
   --color-primary-foreground: #ffffff;
@@ -14,10 +14,10 @@
   --color-secondary-foreground: #ffffff;
   
   --color-accent: #f43f5e;
-  --color-muted: #64748b;
-  --color-muted-foreground: #94a3b8;
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   
-  --color-border: rgba(30, 41, 59, 0.5);
+  --color-border: var(--border);
   
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
@@ -28,25 +28,27 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --background: #f8fafc;
+    --foreground: #020617;
+    --card: rgba(255, 255, 255, 0.7);
+    --card-foreground: #020617;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --border: rgba(226, 232, 240, 0.8);
+    --accent: #f1f5f9;
+    --accent-foreground: #0f172a;
+  }
+
+  .dark {
+    --background: #020617;
+    --foreground: #f8fafc;
+    --card: rgba(15, 23, 42, 0.6);
+    --card-foreground: #f8fafc;
+    --muted: #0f172a;
+    --muted-foreground: #94a3b8;
+    --border: rgba(30, 41, 59, 0.5);
+    --accent: #1e293b;
+    --accent-foreground: #f8fafc;
   }
 }
 
@@ -56,10 +58,14 @@
   }
   
   .glass-morphism {
-    background: rgba(15, 23, 42, 0.4);
+    background: var(--card);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .glass-morphism {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 
