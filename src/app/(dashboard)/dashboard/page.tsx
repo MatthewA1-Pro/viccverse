@@ -9,6 +9,7 @@ import {
   FolderKanban, MessageSquare, BarChart3
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 // Mock Data
 const activeProjects = [
@@ -220,6 +221,40 @@ export default function DashboardOverview() {
         {/* Sidebar Area (Right 1/3) */}
         <div className="space-y-6">
           
+          {/* User Profile Summary */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+          >
+            <GlassCard className="p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-primary/20 transition-colors" />
+              <div className="flex items-center gap-4 mb-4 relative z-10">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary to-secondary p-[2px]">
+                  <div className="w-full h-full rounded-[14px] bg-slate-900 flex items-center justify-center overflow-hidden">
+                     <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200" alt="John Smith" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white">John Smith</h3>
+                  <p className="text-xs text-slate-400 font-medium">Enterprise Admin</p>
+                </div>
+              </div>
+              <div className="flex gap-2 relative z-10">
+                 <Link href="/profile" className="flex-1">
+                   <button className="w-full py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:border-primary/50 transition-colors">
+                     View Profile
+                   </button>
+                 </Link>
+                 <Link href="/settings" className="flex-1">
+                   <button className="w-full py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs font-bold text-slate-300 hover:text-white hover:border-primary/50 transition-colors">
+                     Settings
+                   </button>
+                 </Link>
+              </div>
+            </GlassCard>
+          </motion.div>
+
           {/* Upcoming Meetings */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

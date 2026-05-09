@@ -68,7 +68,7 @@ export default function LandingPage() {
           </button>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link href="#contact">
+            <Link href="/dashboard">
               <button className="px-6 py-2.5 rounded-full bg-white text-slate-950 font-bold hover:bg-slate-200 transition-colors">
                 Start Project
               </button>
@@ -90,7 +90,7 @@ export default function LandingPage() {
                 <Link href="#work" onClick={() => setNavOpen(false)} className="hover:text-white transition-colors">Work</Link>
                 <Link href="#process" onClick={() => setNavOpen(false)} className="hover:text-white transition-colors">Process</Link>
                 <Link href="#contact" onClick={() => setNavOpen(false)} className="hover:text-white transition-colors">Contact</Link>
-                <Link href="#contact" onClick={() => setNavOpen(false)} className="px-6 py-3 rounded-full bg-white text-slate-950 font-bold text-center mt-4">
+                <Link href="/dashboard" onClick={() => setNavOpen(false)} className="px-6 py-3 rounded-full bg-white text-slate-950 font-bold text-center mt-4">
                   Start Project
                 </Link>
               </div>
@@ -139,7 +139,7 @@ export default function LandingPage() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 w-full"
           >
-            <Link href="#contact" className="w-full sm:w-auto">
+            <Link href="/dashboard" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-6 py-4 md:px-8 md:py-4 rounded-full bg-primary text-white font-bold text-base md:text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)]">
                 Start Your Project <ArrowRight size={20} className="shrink-0" />
               </button>
@@ -367,7 +367,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 
-                <Link href="#contact" className="mt-auto">
+                <Link href="/dashboard" className="mt-auto">
                   <button className={`w-full py-4 rounded-xl font-bold transition-all ${tier.popular ? 'bg-primary text-white hover:bg-primary/90' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}>
                     Get Started
                   </button>
@@ -427,7 +427,7 @@ export default function LandingPage() {
             Join the forward-thinking brands that trust ViccVerse to build their most critical digital infrastructure.
           </p>
           <div className="flex flex-col w-full sm:flex-row items-center justify-center gap-4 pt-6">
-             <Link href="#contact" className="w-full sm:w-auto">
+             <Link href="/dashboard" className="w-full sm:w-auto">
                <button className="w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 rounded-full bg-white text-slate-950 font-black text-base md:text-lg hover:bg-slate-200 transition-all flex items-center justify-center gap-2 shadow-xl hover:scale-105">
                  Start Your Journey <ArrowRight size={20} className="shrink-0" />
                </button>

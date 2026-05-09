@@ -170,7 +170,7 @@ export function Sidebar() {
 
       {/* Footer / User Info */}
       <div className="p-4 border-t border-slate-800/50">
-        <div className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group">
+        <Link href="/profile" className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
             <span className="font-bold text-slate-300 text-sm z-10">JS</span>
             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -191,7 +191,7 @@ export function Sidebar() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </Link>
       </div>
     </motion.aside>
   );
