@@ -43,13 +43,14 @@ const bottomMenuItems = [
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
-export function Sidebar() {
+export function Sidebar({ permanent = false }: { permanent?: boolean }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
+  const effectiveCollapsed = permanent ? false : isCollapsed;
 
   return (
     <motion.aside
-      animate={{ width: isCollapsed ? 80 : 260 }}
+      animate={{ width: effectiveCollapsed ? 80 : 260 }}
       className="h-screen sticky top-0 bg-slate-950/80 backdrop-blur-2xl border-r border-slate-800/60 flex flex-col z-50 overflow-hidden shadow-2xl"
     >
       {/* Logo Section */}
@@ -58,7 +59,7 @@ export function Sidebar() {
           <span className="font-bold text-xl text-white">V</span>
         </div>
         <AnimatePresence>
-          {!isCollapsed && (
+          {!effectiveCollapsed && (
             <motion.span
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -71,20 +72,22 @@ export function Sidebar() {
         </AnimatePresence>
       </div>
 
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute top-8 -right-3 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-50"
-      >
-        <ChevronLeft className={cn("w-4 h-4 transition-transform", isCollapsed && "rotate-180")} />
-      </button>
+      {/* Toggle Button - Hidden on mobile or if permanent */}
+      {!permanent && (
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="absolute top-8 -right-3 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full hidden lg:flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-50"
+        >
+          <ChevronLeft className={cn("w-4 h-4 transition-transform", effectiveCollapsed && "rotate-180")} />
+        </button>
+      )}
 
       {/* Navigation */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide py-4 px-4 flex flex-col gap-8">
         
         {/* Main Menu */}
         <nav className="space-y-1">
-          {!isCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Workspace</p>}
+          {!effectiveCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Workspace</p>}
           {topMenuItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -92,7 +95,7 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-4 py-2.5 rounded-xl transition-all group relative overflow-hidden",
+                  "flex items-center gap-4 px-4 py-3 rounded-xl transition-all group relative overflow-hidden active:scale-95",
                   isActive 
                     ? "bg-primary/10 text-primary font-semibold" 
                     : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
@@ -100,14 +103,14 @@ export function Sidebar() {
               >
                 <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
                 <AnimatePresence>
-                  {!isCollapsed && (
+                  {!effectiveCollapsed && (
                     <motion.div
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
                       className="flex-1 flex items-center justify-between whitespace-nowrap"
                     >
-                      <span>{item.label}</span>
+                      <span className="text-sm md:text-base">{item.label}</span>
                       {item.badge && (
                         <span className="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-bold">
                           {item.badge}
@@ -129,7 +132,7 @@ export function Sidebar() {
 
         {/* System Menu */}
         <nav className="space-y-1 mt-auto">
-          {!isCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">System</p>}
+          {!effectiveCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">System</p>}
           {bottomMenuItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -137,7 +140,7 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-4 py-2.5 rounded-xl transition-all group relative overflow-hidden",
+                  "flex items-center gap-4 px-4 py-3 rounded-xl transition-all group relative overflow-hidden active:scale-95",
                   isActive 
                     ? "bg-primary/10 text-primary font-semibold" 
                     : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
@@ -145,12 +148,12 @@ export function Sidebar() {
               >
                 <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
                 <AnimatePresence>
-                  {!isCollapsed && (
+                  {!effectiveCollapsed && (
                     <motion.span
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
-                      className="whitespace-nowrap"
+                      className="whitespace-nowrap text-sm md:text-base"
                     >
                       {item.label}
                     </motion.span>
@@ -170,13 +173,13 @@ export function Sidebar() {
 
       {/* Footer / User Info */}
       <div className="p-4 border-t border-slate-800/50">
-        <Link href="/profile" className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group">
+        <Link href="/profile" className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group active:scale-95">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
             <span className="font-bold text-slate-300 text-sm z-10">JS</span>
             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <AnimatePresence>
-            {!isCollapsed && (
+            {!effectiveCollapsed && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

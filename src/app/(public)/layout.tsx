@@ -67,10 +67,11 @@ export default function PublicLayout({
       <Link 
         href="https://wa.me/#" 
         target="_blank"
-        className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-2xl hover:bg-emerald-600 transition-all hover:scale-110 active:scale-95 group"
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-12 h-12 md:w-14 md:h-14 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:bg-emerald-600 transition-all hover:scale-110 active:scale-95 group"
       >
-        <MessageCircle size={28} />
-        <span className="absolute right-full mr-4 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        <div className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-20" />
+        <MessageCircle size={24} className="md:w-7 md:h-7 relative z-10" />
+        <span className="absolute right-full mr-4 bg-slate-900/90 backdrop-blur-md text-white text-[10px] md:text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10 hidden md:block">
           Chat with an Expert
         </span>
       </Link>

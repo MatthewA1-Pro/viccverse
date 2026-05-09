@@ -74,6 +74,18 @@
   .text-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
 }
 
 @keyframes glow {
@@ -90,7 +102,15 @@ body {
   color: var(--color-foreground);
   font-feature-settings: "rlig" 1, "calt" 1;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  @apply antialiased;
 }
+
+/* Mobile Typography Optimization */
+h1 { @apply text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-[1.1]; }
+h2 { @apply text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-[1.2]; }
+h3 { @apply text-2xl sm:text-3xl font-bold tracking-tight; }
+p { @apply leading-relaxed; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

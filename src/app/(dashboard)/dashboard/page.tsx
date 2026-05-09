@@ -103,7 +103,7 @@ export default function DashboardOverview() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
         <StatCard title="Total Revenue" value="$124,500" change="+14.5%" trend="up" icon={DollarSign} delay={0.1} />
         <StatCard title="Active Projects" value="12" change="+2" trend="up" icon={FolderKanban} delay={0.2} />
         <StatCard title="Team Productivity" value="94%" change="+4.1%" trend="up" icon={Activity} delay={0.3} />
@@ -116,20 +116,20 @@ export default function DashboardOverview() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between mb-8">
+        <GlassCard className="p-4 md:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
-              <h3 className="text-xl font-bold text-white tracking-tight">Revenue Growth</h3>
-              <p className="text-xs text-slate-500 mt-1">Weekly performance overview.</p>
+              <h3 className="text-lg md:text-xl font-bold text-white tracking-tight">Revenue Growth</h3>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-1">Weekly performance overview.</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-primary" />
-                <span className="text-xs text-slate-400 font-bold">Revenue</span>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary" />
+                <span className="text-[10px] sm:text-xs text-slate-400 font-bold">Revenue</span>
               </div>
             </div>
           </div>
-          <div className="h-[300px] w-full">
+          <div className="h-[200px] sm:h-[250px] md:h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
                 <defs>
@@ -143,24 +143,24 @@ export default function DashboardOverview() {
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#64748b', fontSize: 12 }}
+                  tick={{ fill: '#64748b', fontSize: 10 }}
                   dy={10}
                 />
                 <YAxis 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#64748b', fontSize: 12 }}
+                  tick={{ fill: '#64748b', fontSize: 10 }}
                   dx={-10}
                 />
                 <ChartTooltip 
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px', fontSize: '12px' }}
                   itemStyle={{ color: '#fff' }}
                 />
                 <Area 
                   type="monotone" 
                   dataKey="value" 
                   stroke="#8b5cf6" 
-                  strokeWidth={3}
+                  strokeWidth={2}
                   fillOpacity={1} 
                   fill="url(#colorValue)" 
                 />
@@ -181,22 +181,22 @@ export default function DashboardOverview() {
             transition={{ delay: 0.5 }}
           >
             <GlassCard className="p-0 overflow-hidden">
-              <div className="p-6 border-b border-slate-800/50 flex items-center justify-between">
+              <div className="p-4 md:p-6 border-b border-slate-800/50 flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-bold text-white">Active Projects</h2>
-                  <p className="text-xs text-slate-500 mt-1">Monitor your ongoing deliverables.</p>
+                  <h2 className="text-base md:text-lg font-bold text-white">Active Projects</h2>
+                  <p className="text-[10px] sm:text-xs text-slate-500 mt-1">Monitor your ongoing deliverables.</p>
                 </div>
-                <button className="text-sm font-bold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors">
-                  View All <ArrowRight size={16} />
+                <button className="text-xs sm:text-sm font-bold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors">
+                  View All <ArrowRight size={14} />
                 </button>
               </div>
               <div className="divide-y divide-slate-800/50">
                 {activeProjects.map((project) => (
-                  <div key={project.id} className="p-6 hover:bg-slate-900/30 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div key={project.id} className="p-4 md:p-6 hover:bg-slate-900/30 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-bold text-white text-base">{project.name}</h3>
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                      <div className="flex items-center gap-3 mb-1 sm:mb-2">
+                        <h3 className="font-bold text-white text-sm sm:text-base">{project.name}</h3>
+                        <span className={`px-2 py-0.5 rounded-full text-[8px] sm:text-[10px] font-bold uppercase tracking-wider ${
                           project.status === 'On Track' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
                           project.status === 'At Risk' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
                           'bg-amber-500/10 text-amber-400 border border-amber-500/20'
@@ -204,15 +204,15 @@ export default function DashboardOverview() {
                           {project.status}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 font-medium">{project.client} • Due {project.dueDate}</p>
+                      <p className="text-[10px] sm:text-xs text-slate-500 font-medium">{project.client} • Due {project.dueDate}</p>
                     </div>
                     
-                    <div className="flex-1 w-full max-w-xs">
-                      <div className="flex justify-between text-xs mb-1.5 font-medium">
+                    <div className="flex-1 w-full max-w-none sm:max-w-xs">
+                      <div className="flex justify-between text-[10px] sm:text-xs mb-1.5 font-medium">
                         <span className="text-slate-400">Progress</span>
                         <span className="text-white">{project.progress}%</span>
                       </div>
-                      <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                      <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800">
                         <div 
                           className={`h-full rounded-full ${project.progress > 80 ? 'bg-emerald-500' : project.progress < 50 ? 'bg-red-500' : 'bg-primary'}`} 
                           style={{ width: `${project.progress}%` }} 
@@ -220,15 +220,15 @@ export default function DashboardOverview() {
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-3 pl-4">
+                    <div className="flex items-center justify-between sm:justify-start gap-3 sm:pl-4">
                       <div className="flex -space-x-2">
                         {[...Array(Math.min(project.members, 3))].map((_, i) => (
-                          <div key={i} className="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-950 flex items-center justify-center text-[10px] font-bold text-slate-400">
+                          <div key={i} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800 border-2 border-slate-950 flex items-center justify-center text-[8px] sm:text-[10px] font-bold text-slate-400">
                             U{i+1}
                           </div>
                         ))}
                         {project.members > 3 && (
-                          <div className="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-950 flex items-center justify-center text-[10px] font-bold text-slate-400">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800 border-2 border-slate-950 flex items-center justify-center text-[8px] sm:text-[10px] font-bold text-slate-400">
                             +{project.members - 3}
                           </div>
                         )}
@@ -252,39 +252,39 @@ export default function DashboardOverview() {
           >
             <GlassCard className="p-6 bg-gradient-to-br from-slate-900 to-slate-950 border-slate-800/60 hover:border-primary/30 transition-colors group">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                  <Bot size={24} />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                  <Bot size={20} className="sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors">ViccVerse AI</h3>
-                  <p className="text-xs text-slate-500">Ready to assist you.</p>
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-primary transition-colors">ViccVerse AI</h3>
+                  <p className="text-[10px] sm:text-xs text-slate-500">Ready to assist you.</p>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Generate weekly reports, analyze project risks, or draft client updates instantly.</p>
+              <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">Generate weekly reports, analyze project risks, or draft client updates instantly.</p>
               <div className="flex gap-2">
                 <input 
                   type="text" 
-                  placeholder="Ask AI anything..." 
-                  className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary/50 transition-colors"
+                  placeholder="Ask AI..." 
+                  className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary/50 transition-colors h-10"
                 />
-                <button className="px-4 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 transition-colors">
+                <button className="px-4 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 transition-colors h-10 active:scale-95">
                   Ask
                 </button>
               </div>
             </GlassCard>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {[
                 { label: "Create Invoice", icon: DollarSign, color: "text-emerald-400", bg: "bg-emerald-400/10" },
-                { label: "Schedule Meeting", icon: CalendarIcon, color: "text-secondary", bg: "bg-secondary/10" },
+                { label: "Schedule", icon: CalendarIcon, color: "text-secondary", bg: "bg-secondary/10" },
                 { label: "Upload Files", icon: Download, color: "text-amber-400", bg: "bg-amber-400/10" },
-                { label: "View Reports", icon: BarChart3, color: "text-primary", bg: "bg-primary/10" },
+                { label: "Reports", icon: BarChart3, color: "text-primary", bg: "bg-primary/10" },
               ].map((action, i) => (
-                <GlassCard key={i} className="p-4 flex flex-col items-center justify-center text-center gap-3 hover:bg-slate-900/80 hover:border-slate-700 cursor-pointer transition-all group">
-                  <div className={`w-10 h-10 rounded-full ${action.bg} ${action.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <action.icon size={18} />
+                <GlassCard key={i} className="p-3 sm:p-4 flex flex-col items-center justify-center text-center gap-2 sm:gap-3 hover:bg-slate-900/80 hover:border-slate-700 cursor-pointer transition-all group active:scale-95">
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${action.bg} ${action.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    <action.icon size={16} />
                   </div>
-                  <span className="text-xs font-bold text-slate-300 group-hover:text-white">{action.label}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-300 group-hover:text-white leading-tight">{action.label}</span>
                 </GlassCard>
               ))}
             </div>
