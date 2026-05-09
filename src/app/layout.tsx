@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ViccVerse | Premium Digital Agency",
+  title: "Viccverse | Premium Digital Agency",
   description: "We build modern AI-powered websites, SaaS platforms, and digital products that help businesses grow faster.",
 };
 

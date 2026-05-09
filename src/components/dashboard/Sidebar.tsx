@@ -78,7 +78,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
       {/* Logo Section */}
       <div className="p-6 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.3)] shrink-0">
-          <span className="font-bold text-xl text-white">V</span>
+          <Zap className="w-6 h-6 text-white fill-white" />
         </div>
         <AnimatePresence>
           {!effectiveCollapsed && (
@@ -86,9 +86,9 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
-              className="font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400"
+              className="font-black text-xl tracking-tight text-foreground"
             >
-              Vicc<span className="text-primary">Verse</span>
+              Vicc<span className="text-primary">verse</span>
             </motion.span>
           )}
         </AnimatePresence>
@@ -98,7 +98,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
       {!permanent && (
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute top-8 -right-3 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full hidden lg:flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-50"
+          className="absolute top-8 -right-3 w-6 h-6 bg-background border border-border rounded-full hidden lg:flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors z-50 shadow-sm"
         >
           <ChevronLeft className={cn("w-4 h-4 transition-transform", effectiveCollapsed && "rotate-180")} />
         </button>
@@ -109,7 +109,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
         
         {/* Main Menu */}
         <nav className="space-y-1">
-          {!effectiveCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Workspace</p>}
+          {!effectiveCollapsed && <p className="px-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">Workspace</p>}
           {topMenuItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -120,7 +120,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
                   "flex items-center gap-4 px-4 py-3 rounded-xl transition-all group relative overflow-hidden active:scale-95",
                   isActive 
                     ? "bg-primary/10 text-primary font-semibold" 
-                    : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
+                    : "text-muted-foreground font-medium hover:bg-muted/50 hover:text-foreground"
                 )}
               >
                 <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
@@ -154,7 +154,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
 
         {/* System Menu */}
         <nav className="space-y-1 mt-auto">
-          {!effectiveCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">System</p>}
+          {!effectiveCollapsed && <p className="px-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">System</p>}
           {bottomMenuItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -165,7 +165,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
                   "flex items-center gap-4 px-4 py-3 rounded-xl transition-all group relative overflow-hidden active:scale-95",
                   isActive 
                     ? "bg-primary/10 text-primary font-semibold" 
-                    : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
+                    : "text-muted-foreground font-medium hover:bg-muted/50 hover:text-foreground"
                 )}
               >
                 <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
@@ -196,11 +196,11 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
       {/* Footer / User Info */}
       <div className="p-4 border-t border-border">
         <Link href="/profile" className="bg-muted/50 hover:bg-muted transition-colors border border-border rounded-2xl p-3 flex items-center gap-3 cursor-pointer group active:scale-95">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary/20 to-secondary/20 border border-border flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
             {user?.user_metadata?.avatar_url ? (
               <img src={user.user_metadata.avatar_url} alt={fullName} className="w-full h-full object-cover" />
             ) : (
-              <span className="font-bold text-slate-300 text-sm z-10">{initials}</span>
+              <span className="font-bold text-foreground text-sm z-10">{initials}</span>
             )}
             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
@@ -212,10 +212,10 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
                 exit={{ opacity: 0 }}
                 className="flex flex-col min-w-0 flex-1"
               >
-                <span className="text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors">{fullName}</span>
+                <span className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">{fullName}</span>
                 <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-secondary" />
-                  <span className="text-[10px] text-slate-500 font-semibold truncate">Enterprise Plan</span>
+                  <span className="text-[10px] text-muted-foreground font-semibold truncate">Enterprise Plan</span>
                 </div>
               </motion.div>
             )}
@@ -224,7 +224,7 @@ export function Sidebar({ permanent = false }: { permanent?: boolean }) {
         <button 
           onClick={handleSignOut}
           className={cn(
-            "w-full mt-2 flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all group active:scale-95",
+            "w-full mt-2 flex items-center gap-4 px-4 py-3 rounded-xl text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all group active:scale-95",
             effectiveCollapsed && "justify-center"
           )}
         >

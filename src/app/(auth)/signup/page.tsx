@@ -50,8 +50,6 @@ export default function SignupPage() {
       if (signupError) throw signupError;
 
       if (data.user) {
-        // If email confirmation is required, they might need to check their inbox
-        // For now, let's redirect to verify-email or dashboard depending on setup
         router.push("/verify-email");
       }
     } catch (err: any) {
@@ -62,14 +60,14 @@ export default function SignupPage() {
   };
 
   return (
-    <GlassCard className="p-8 md:p-10 border-white/5" glow>
+    <GlassCard className="p-8 md:p-10 border-border" glow>
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-        <p className="text-slate-400">Join 10k+ businesses scaling with Vortex</p>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Create Account</h2>
+        <p className="text-muted-foreground">Join 10k+ businesses scaling with Viccverse</p>
       </div>
 
       {error && (
-        <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+        <div className="mb-6 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm text-center">
           {error}
         </div>
       )}
@@ -123,12 +121,12 @@ export default function SignupPage() {
           <div className="pt-1">
             <input 
               type="checkbox" 
-              className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-primary focus:ring-primary/20 transition-all" 
+              className="w-4 h-4 rounded bg-muted border-border text-primary focus:ring-primary/20 transition-all" 
               required
             />
           </div>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            I agree to the <Link href="#" className="text-slate-300 underline">Terms of Service</Link> and <Link href="#" className="text-slate-300 underline">Privacy Policy</Link>.
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            I agree to the <Link href="#" className="text-primary hover:underline">Terms of Service</Link> and <Link href="#" className="text-primary hover:underline">Privacy Policy</Link>.
           </p>
         </div>
 
@@ -142,7 +140,7 @@ export default function SignupPage() {
         </NeonButton>
       </form>
 
-      <p className="text-center mt-8 text-sm text-slate-400">
+      <p className="text-center mt-8 text-sm text-muted-foreground">
         Already have an account?{" "}
         <Link href="/login" className="text-primary font-bold hover:underline">
           Sign in
