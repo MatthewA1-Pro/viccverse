@@ -3,28 +3,43 @@
 import { cn } from "@/lib/utils";
 import { 
   LayoutDashboard, 
+  FolderKanban,
+  CheckSquare,
   BarChart3, 
-  PieChart, 
-  FileText, 
-  Users, 
+  MessageSquare,
+  Users,
+  Files,
+  Calendar,
+  Bot,
+  Receipt,
+  Activity,
   Settings, 
-  Bell, 
   LogOut,
   ChevronLeft,
   Zap,
-  ShieldCheck
+  ShieldCheck,
+  Search
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const menuItems = [
+const topMenuItems = [
   { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
+  { icon: FolderKanban, label: "Projects", href: "/projects" },
+  { icon: CheckSquare, label: "Tasks", href: "/tasks" },
   { icon: BarChart3, label: "Analytics", href: "/analytics" },
-  { icon: PieChart, label: "Reports", href: "/reports" },
-  { icon: Users, label: "Profile", href: "/profile" },
-  { icon: Bell, label: "Notifications", href: "/notifications" },
+  { icon: MessageSquare, label: "Messages", href: "/messages", badge: "3" },
+  { icon: Users, label: "Team", href: "/team" },
+  { icon: Files, label: "File Manager", href: "/files" },
+  { icon: Calendar, label: "Calendar", href: "/calendar" },
+  { icon: Bot, label: "AI Assistant", href: "/ai" },
+];
+
+const bottomMenuItems = [
+  { icon: Receipt, label: "Invoices", href: "/invoices" },
+  { icon: Activity, label: "Activity Logs", href: "/activity" },
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
@@ -35,12 +50,12 @@ export function Sidebar() {
   return (
     <motion.aside
       animate={{ width: isCollapsed ? 80 : 260 }}
-      className="h-screen sticky top-0 bg-slate-950/50 backdrop-blur-xl border-r border-slate-800/50 flex flex-col z-50 overflow-hidden"
+      className="h-screen sticky top-0 bg-slate-950/80 backdrop-blur-2xl border-r border-slate-800/60 flex flex-col z-50 overflow-hidden shadow-2xl"
     >
       {/* Logo Section */}
       <div className="p-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center neon-glow-primary shrink-0">
-          <Zap className="text-white w-6 h-6 fill-white" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.3)] shrink-0">
+          <span className="font-bold text-xl text-white">V</span>
         </div>
         <AnimatePresence>
           {!isCollapsed && (
@@ -48,9 +63,9 @@ export function Sidebar() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
-              className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400"
+              className="font-black text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400"
             >
-              Vortex<span className="text-primary">Pro</span>
+              Vicc<span className="text-primary">Verse</span>
             </motion.span>
           )}
         </AnimatePresence>
@@ -59,55 +74,106 @@ export function Sidebar() {
       {/* Toggle Button */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute top-7 -right-3 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-colors z-50"
+        className="absolute top-8 -right-3 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-50"
       >
         <ChevronLeft className={cn("w-4 h-4 transition-transform", isCollapsed && "rotate-180")} />
       </button>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-8 space-y-2">
-        {menuItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-4 px-4 py-3 rounded-xl transition-all group relative overflow-hidden",
-                isActive 
-                  ? "bg-primary/10 text-primary" 
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
-              )}
-            >
-              <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
-              <AnimatePresence>
-                {!isCollapsed && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    className="font-medium whitespace-nowrap"
-                  >
-                    {item.label}
-                  </motion.span>
+      <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide py-4 px-4 flex flex-col gap-8">
+        
+        {/* Main Menu */}
+        <nav className="space-y-1">
+          {!isCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Workspace</p>}
+          {topMenuItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-4 px-4 py-2.5 rounded-xl transition-all group relative overflow-hidden",
+                  isActive 
+                    ? "bg-primary/10 text-primary font-semibold" 
+                    : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
                 )}
-              </AnimatePresence>
-              {isActive && (
-                <motion.div
-                  layoutId="active-pill"
-                  className="absolute left-0 w-1 h-6 bg-primary rounded-r-full"
-                />
-              )}
-            </Link>
-          );
-        })}
-      </nav>
+              >
+                <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
+                <AnimatePresence>
+                  {!isCollapsed && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      className="flex-1 flex items-center justify-between whitespace-nowrap"
+                    >
+                      <span>{item.label}</span>
+                      {item.badge && (
+                        <span className="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-bold">
+                          {item.badge}
+                        </span>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    layoutId="active-pill"
+                    className="absolute left-0 w-1 h-6 bg-primary rounded-r-full shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* System Menu */}
+        <nav className="space-y-1 mt-auto">
+          {!isCollapsed && <p className="px-4 text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">System</p>}
+          {bottomMenuItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-4 px-4 py-2.5 rounded-xl transition-all group relative overflow-hidden",
+                  isActive 
+                    ? "bg-primary/10 text-primary font-semibold" 
+                    : "text-slate-400 font-medium hover:bg-slate-900 hover:text-slate-200"
+                )}
+              >
+                <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
+                <AnimatePresence>
+                  {!isCollapsed && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      className="whitespace-nowrap"
+                    >
+                      {item.label}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    layoutId="active-pill"
+                    className="absolute left-0 w-1 h-6 bg-primary rounded-r-full"
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
 
       {/* Footer / User Info */}
-      <div className="p-4 mt-auto">
-        <div className="glass-morphism rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-            <Users className="w-5 h-5 text-slate-400" />
+      <div className="p-4 border-t border-slate-800/50">
+        <div className="bg-slate-900/50 hover:bg-slate-900 transition-colors border border-slate-800/50 rounded-2xl p-3 flex items-center gap-3 cursor-pointer group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-700 border border-slate-600 flex items-center justify-center shrink-0 overflow-hidden shadow-inner relative">
+            <span className="font-bold text-slate-300 text-sm z-10">JS</span>
+            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <AnimatePresence>
             {!isCollapsed && (
@@ -115,21 +181,16 @@ export function Sidebar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex flex-col min-w-0"
+                className="flex flex-col min-w-0 flex-1"
               >
-                <span className="text-sm font-semibold text-slate-200 truncate">Alex Rivera</span>
+                <span className="text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors">John Smith</span>
                 <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-secondary" />
-                  <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Pro Plan</span>
+                  <span className="text-[10px] text-slate-500 font-semibold truncate">Enterprise Plan</span>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-          {!isCollapsed && (
-            <button className="ml-auto text-slate-500 hover:text-red-400 transition-colors">
-              <LogOut className="w-4 h-4" />
-            </button>
-          )}
         </div>
       </div>
     </motion.aside>
